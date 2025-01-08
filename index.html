@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ambassadoribet API Documentation</title>
+  <title>Amlib.js Documentation</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -24,7 +24,7 @@
 
     header h1 {
       margin: 0;
-      font-size: 1.8rem;
+      font-size: 2.5rem;
     }
 
     .container {
@@ -73,18 +73,60 @@
       margin: 2rem 0;
       color: #777;
     }
+
+    .gql-playground {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #f1f1f1;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .gql-playground textarea {
+      width: 100%;
+      height: 150px;
+      margin-bottom: 1rem;
+      font-family: monospace;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      color: #004085;
+    }
+
+    .gql-playground button {
+      background: #004085;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .gql-playground button:hover {
+      background: #003366;
+    }
+
+    .gql-response {
+      margin-top: 1rem;
+      background: #2d2d2d;
+      color: #fff;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>Ambassadoribet API Documentation</h1>
+  <h1>Amlib.js Documentation</h1>
 </header>
 
 <div class="container">
   <section>
     <h2>Overview</h2>
-    <p> <a target="_blank" href="https://usernamenotavailable12.github.io/src-js/dist/Amlib.min.js"><code>Amlib.js</code> </a>is a utility library that provides shared functions and constants for interacting with the Ambassadoribet API. It simplifies common tasks like making GraphQL requests, extracting authentication data, retrieving cookies, and formatting dates.</p>
+    <p><code>Amlib.js</code> is a utility library that provides shared functions and constants for interacting with the Ambassadoribet API. It simplifies common tasks like making GraphQL requests, extracting authentication data, retrieving cookies, and formatting dates.</p>
   </section>
 
   <section>
@@ -98,6 +140,22 @@
     <p><strong>Description:</strong> The brand identifier used in GraphQL queries.</p>
     <p><strong>Type:</strong> <code>string</code></p>
     <p><strong>Value:</strong> <code>ab</code></p>
+  </section>
+
+  <section class="gql-playground">
+    <h2>GraphQL Playground</h2>
+    <p>Use this playground to send GraphQL queries directly to the API endpoint.</p>
+    <textarea id="gql-query">query RecentWinConnection {
+  recentWinConnection(brandId: "ab", last: 1) {
+    edges {
+      node {
+        amount
+      }
+    }
+  }
+}</textarea>
+    <button id="send-query">Send Query</button>
+    <div id="gql-response" class="gql-response"></div>
   </section>
 
   <section>
@@ -161,8 +219,30 @@ console.log(formattedDate); // e.g., "1/1/2025, 12:00:00 PM"</code></pre>
 </div>
 
 <footer>
-  <p>&copy; 2025 Ambassadoribet API Documentation. All rights reserved.</p>
+  <p>&copy; 2025 Amlib.js Documentation. All rights reserved.</p>
 </footer>
+
+<script>
+  document.getElementById('send-query').addEventListener('click', async () => {
+    const query = document.getElementById('gql-query').value;
+    const responseContainer = document.getElementById('gql-response');
+
+    try {
+      const response = await fetch('https://api-tma-stg.themill.tech/gql', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query }),
+      });
+
+      const data = await response.json();
+      responseContainer.textContent = JSON.stringify(data, null, 2);
+    } catch (error) {
+      responseContainer.textContent = `Error: ${error.message}`;
+    }
+  });
+</script>
 
 </body>
 </html>
