@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ambassadoribet API Documentation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f9f9f9;
+    }
+
+    header {
+      background: #004085;
+      color: #fff;
+      padding: 1rem 0;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    h2 {
+      border-bottom: 2px solid #004085;
+      padding-bottom: 0.5rem;
+      color: #004085;
+    }
+
+    code {
+      background: #eaeaea;
+      padding: 0.2rem 0.4rem;
+      border-radius: 3px;
+      font-size: 90%;
+      color: #d63384;
+    }
+
+    pre {
+      background: #2d2d2d;
+      color: #fff;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+      font-size: 0.9rem;
+    }
+
+    .changelog ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .changelog ul li {
+      background: #eaeaea;
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      border-left: 4px solid #004085;
+    }
+
+    footer {
+      text-align: center;
+      margin: 2rem 0;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Ambassadoribet API Documentation</h1>
+</header>
+
+<div class="container">
+  <section>
+    <h2>Overview</h2>
+    <p> <a target="_blank" href="https://usernamenotavailable12.github.io/src-js/dist/Amlib.min.js"><code>Amlib.js</code> </a>is a utility library that provides shared functions and constants for interacting with the Ambassadoribet API. It simplifies common tasks like making GraphQL requests, extracting authentication data, retrieving cookies, and formatting dates.</p>
+  </section>
+
+  <section>
+    <h2>Constants</h2>
+    <h3><code>API_URL</code></h3>
+    <p><strong>Description:</strong> The base URL for GraphQL API requests.</p>
+    <p><strong>Type:</strong> <code>string</code></p>
+    <p><strong>Value:</strong> <code>https://www.ambassadoribet.com/_internal/gql</code></p>
+
+    <h3><code>BRAND_ID</code></h3>
+    <p><strong>Description:</strong> The brand identifier used in GraphQL queries.</p>
+    <p><strong>Type:</strong> <code>string</code></p>
+    <p><strong>Value:</strong> <code>ab</code></p>
+  </section>
+
+  <section>
+    <h2>Functions</h2>
+
+    <h3><code>fetchGraphQL(query, variables = {})</code></h3>
+    <p><strong>Description:</strong> Sends a GraphQL query to the Ambassadoribet API.</p>
+    <p><strong>Parameters:</strong></p>
+    <ul>
+      <li><code>query</code> (<code>string</code>): The GraphQL query string.</li>
+      <li><code>variables</code> (<code>object</code>): An optional object containing variables for the query.</li>
+    </ul>
+    <p><strong>Returns:</strong> A <code>Promise</code> that resolves to the API response.</p>
+    <pre><code>const query = `query Example { exampleField }`;
+const variables = { key: "value" };
+const result = await fetchGraphQL(query, variables);
+console.log(result);</code></pre>
+
+    <h3><code>extractAuthDataFromCookie()</code></h3>
+    <p><strong>Description:</strong> Extracts authentication data from the <code>auth</code> cookie.</p>
+    <p><strong>Returns:</strong> An object containing <code>userId</code> and <code>accessToken</code>, or <code>null</code> if the cookie is missing or invalid.</p>
+    <pre><code>const authData = extractAuthDataFromCookie();
+if (authData) {
+  console.log(authData.userId);
+}</code></pre>
+
+    <h3><code>getCookie(name)</code></h3>
+    <p><strong>Description:</strong> Retrieves the value of a cookie by name.</p>
+    <p><strong>Parameters:</strong></p>
+    <ul>
+      <li><code>name</code> (<code>string</code>): The name of the cookie.</li>
+    </ul>
+    <p><strong>Returns:</strong> The cookie value as a string, or <code>null</code> if the cookie is not found.</p>
+    <pre><code>const authCookie = getCookie("auth");
+console.log(authCookie);</code></pre>
+
+    <h3><code>formatDate(isoString)</code></h3>
+    <p><strong>Description:</strong> Converts an ISO date string to a localized string.</p>
+    <p><strong>Parameters:</strong></p>
+    <ul>
+      <li><code>isoString</code> (<code>string</code>): The ISO date string.</li>
+    </ul>
+    <p><strong>Returns:</strong> A formatted date string.</p>
+    <pre><code>const formattedDate = formatDate("2025-01-01T12:00:00Z");
+console.log(formattedDate); // e.g., "1/1/2025, 12:00:00 PM"</code></pre>
+  </section>
+
+  <section class="changelog">
+    <h2>Changelog</h2>
+    <ul>
+      <li><strong>v1.0:</strong> Initial release with the following features:</li>
+      <ul>
+        <li><code>fetchGraphQL</code></li>
+        <li><code>extractAuthDataFromCookie</code></li>
+        <li><code>getCookie</code></li>
+        <li><code>formatDate</code></li>
+        <li>Constants: <code>API_URL</code>, <code>BRAND_ID</code></li>
+      </ul>
+    </ul>
+  </section>
+</div>
+
+<footer>
+  <p>&copy; 2025 Ambassadoribet API Documentation. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
