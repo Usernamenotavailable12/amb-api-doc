@@ -76,8 +76,13 @@
       background: #eaeaea;
       margin: 0.5rem 0;
       padding: 0.5rem;
-      border-left: 4px solid #004085;
+      border-left: 2px solid rgba(0, 64, 133, 0.4);
+
+      &:has(.version-label) {
+        border-left: 4px solid #004085;
+      }
     }
+
 
     footer {
       text-align: center;
@@ -392,15 +397,43 @@ export type UserInterpolationKey =
     <section class="changelog">
       <h2>Changelog</h2>
       <ul>
-        <li><strong>v1.1:</strong> Added a new "Global Variables" section with detailed interpolation keys.</li>
-        <li><strong>v1.0:</strong> Initial release with the following features:</li>
-        <ul>
-          <li><code>fetchGraphQL</code></li>
-          <li><code>extractAuthDataFromCookie</code></li>
-          <li><code>getCookie</code></li>
-          <li><code>formatDate</code></li>
-          <li>Constants: <code>API_URL</code>, <code>BRAND_ID</code></li>
-        </ul>
+        <li><strong class="version-label">v1.2:</strong>
+          <ul>
+            <li><strong>Minified & Combined JS:</strong> Integrated multiple scripts into <code>main.min.js</code> for
+              improved performance. The following scripts are now part of <code>main.min.js</code>:
+              <ul>
+                <li><code>Amlib.js</code></li>
+                <li><code>SessionPolling-app.js</code></li>
+                <li><code>cookie-app.js</code></li>
+                <li><code>jackpot-button-app.js</code></li>
+                <li><code>shop-app.js</code></li>
+                <li><code>sportSearch-app.js</code></li>
+                <li><code>userBoxConnection-app.js</code></li>
+                <li><code>walletUserStats-app.js</code></li>
+              </ul>
+            </li>
+            <li><strong>Separated Scripts:</strong>
+              <ul>
+                <li><code>SyndicatePolling-app.js</code> remains a separate script since it is dynamically added when
+                  the user navigates to the Syndicate page.</li>
+                <li><strong>New Script:</strong> <code>newGamesBadge.js</code> was introduced. This script automatically
+                  adds a "NEW" badge to newly released games using data from <code>"operationName=LobbyGames"</code>.
+                  Unlike other scripts, it uses an <strong>HTTP GET request</strong> instead of a GraphQL query.</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><strong class="version-label">v1.1:</strong> Added a new "Global Variables" section with detailed
+          interpolation keys.</li>
+        <li><strong class="version-label">v1.0:</strong> Initial release with the following features:
+          <ul>
+            <li><code>fetchGraphQL</code></li>
+            <li><code>extractAuthDataFromCookie</code></li>
+            <li><code>getCookie</code></li>
+            <li><code>formatDate</code></li>
+            <li>Constants: <code>API_URL</code>, <code>BRAND_ID</code></li>
+          </ul>
+        </li>
       </ul>
     </section>
   </div>
